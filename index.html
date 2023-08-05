@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scratch Addons Custom Styling</title>
+    <style>
+        .codeblock {
+            background-color: #000;
+            padding: 1rem;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        /* Highlight.js */
+
+        .hljs-comment {
+            color: #ccc;
+        }
+
+        .hljs-keyword,
+        .hljs-built_in,
+        .hljs-meta {
+            color: #f86;
+        }
+
+        .hljs-string {
+            color: #ccf;
+        }
+
+        .hljs-selector-pseudo {
+            color: #f9f;
+        }
+
+        .hljs-attr {
+            color: #cfc;
+        }
+
+        .hljs-selector-class,
+        .hljs-selector-id {
+            color: #9ff;
+        }
+        .hljs-selector-tag {
+            color: #ff9;
+        }
+
+        .hljs-attribute {
+            color: #9f9;
+        }
+
+        .hljs-number {
+            color: #f99;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Scratch Addons Custom Styling</h1>
+    <div class="import-links">
+        <a href="#changelog">Changelog</a> -
+        <a href="#sourcecode">UserStyle Source</a> -
+        <a href="./userstyle.user.css">Download</a>
+    </div>
+    <p>This userstyle is incredibly basic, simply changing the styling of Certain webpages to be more inline with the original version of them... because I like it better.</p>
+    <p>Please note: this userstyle is made for usage with <a href="https://scratchaddons.com">Scratch Addons</a>' <em>Scratch 2.0 → 3.0</em>(<code title="The internal name for the addon.">scratchr2</code>). No need to change the setting of that addon, as this is designed around the defaults.</p>
+    <a href="./userstyle.user.css">Download UserStyle</a>
+    <details id="sourcecode">
+        <summary><b>Show Source</b></summary>
+        <pre class="codeblock" id="codeblock-userstyleCSS"></pre>
+    </details>
+    <p>Made by <a href="https://github.com/Steve0Greatness">Steve0Greatness</a></p>
+    <h2 id="changelog">Changelog</h2>
+    <ul>
+        <li><b>V-1.0.3</b><br>
+            -- Changed to the <code>.user.css</code> format accepted by <a href="https://add0n.com/stylus.html">Stylus</a>.</li>
+        <li><b>V-1.0.2</b><br>
+            -- The forums' header color is now effected by the `var(--SACS-forum-header-color)` variable.<br>
+            -- It's also centered in order to match `/search` and `/explore` more.</li>
+        <li><b>V-1.0.1</b><br>
+            -- The "original poster" badge will no longer show up on the first post of a topic</li>
+    </ul>
+    <script type="module">
+        import "https://code.jquery.com/jquery-3.7.0.min.js";
+        import hljs from "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/es/highlight.min.js";
+        import css from "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/es/languages/css.min.js";
+        hljs.registerLanguage("css", css);
+        (async function() {
+        
+        const UserStyleCode = await (await fetch("userstyle.user.css")).text();
+        const CodeBlock     = $("#codeblock-userstyleCSS");
+        
+        const highlighted = hljs.highlight(UserStyleCode, { language: "css" }).value;
+        CodeBlock.html(highlighted);
+
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+/* ==UserStyle==
+@name         Scratch Addons Custom Styling
+@namespace    steve0greatness.github.com/SA-Custom
+@version      1.0.3
+@license      MIT
+@preprocessor default
+@var color SACS-forum-header-color "Forum Header Color" #064734
+==/Usertyle== */
+
+@-moz-document domain("scratch.mit.edu") {
+    /* VARIABLE DEFINITIONS */
+    
+    :root {
+    	--SACS-forum-post-border-color: var(--darkWww-border, #0000001a);
+    	--SACS-forum-post-sig-border: var(--darkWww-border-20, #CCC);
+    	--SACS-URL-color: var(--darkWww-link, #4D97FF);
+    	--SACS-reply-box-color: var(--darkWww-box, white);
+    	--SACS-URL-hover-color: var(--darkWww-link-hover, #4280D7);
+    	--SACS-RSS-button-filters: grayscale() invert() brightness(3);
+    }
+    
+    /* LINKS DE-BUTTON-IFICATION */
+    .linkst li:not(:last-child) a,
+	.linksb li:not(:last-child) a,
+	.pagination span,
+	.pagination a {
+    	background-color: transparent !important;
+    	color: var(--SACS-URL-color) !important;
+    	border: none !important;
+    	padding: 0 !important;
+    }
+    
+    .linkst li:not(:last-child) a:hover,
+	.linksb li:not(:last-child) a:hover,
+	.pagination span:hover,
+	.pagination a:hover {
+    	color: var(--SACS-URL-hover-color) !important;
+    }
+    
+    /* FORUM BOX CLASSIC */
+    .firstpost .box .box-content {
+    	border-left: 1px solid var(--SACS-forum-post-border-color) !important;
+    	border-top: 1px solid var(--SACS-forum-post-border-color) !important;
+    	border-bottom: 1px solid var(--SACS-forum-post-border-color) !important;
+    	border-bottom-right-radius: 5px;
+    	border-bottom-left-radius: 5px;
+    	padding-left: 15px;
+    }
+    
+    .postright::before {
+    	display: none !important;
+    }
+    
+    .postfootright > ul {
+    	border-bottom-left-radius: 0 !important;
+    	border-bottom: none !important;
+    }
+    
+    .postmsg {
+    	border-top-right-radius: 0 !important;
+    	border-top: none !important;
+    	min-height: 15rem;
+    }
+    
+    
+    .postleft {
+    	margin-top: 15px;
+    }
+    
+    .firstpost .box .box-head {
+    	background-color: var(--SACS-forum-header-color) !important;
+    	padding: 8px;
+    	border: 1px solid var(--SACS-forum-post-border-color) !important;
+    	border-bottom: none !important;
+    	border-top-right-radius: 5px;
+    	border-top-left-radius: 5px;
+    }
+    .firstpost .box .box-head .conr,
+	.firstpost .box .box-head a {
+    	color: #fff !important;
+    }
+    
+    /* REPLY BOX */
+    #reply .box-head {
+    	border: 1px solid var(--SACS-forum-post-border-color) !important;
+    	border-top-right-radius: 5px !important;
+    	padding: 5px !important;
+    	background-color: var(--SACS-reply-box-color) !important;
+    	border-top-left-radius: 5px !important;
+    }
+    
+    #reply .box-content {
+    	border: 1px solid var(--SACS-forum-post-border-color) !important;
+    	border-top: none !important;
+    	padding: 10px !important;
+    	border-bottom-right-radius: 5px !important;
+    	padding-bottom: 15px !important;
+    	border-bottom-left-radius: 5px !important;
+    }
+    
+    #reply .box-head h4 {
+    	margin: 5px !important;
+    }
+    
+    /* PAGE SELECTOR */
+    .pagination .disabled,
+    .pagination .disabled:hover,
+    .pagination span.current,
+    .pagination span.current:hover {
+    	opacity: 1 !important;
+    	color: #fff !important;
+    }
+    
+    .page-current.active {
+    	color: white !important;
+    }
+    .page-current.active:hover {
+    	color: white !important;
+    }
+    .page-links .disabled:hover {
+    	color: white !important;
+    	filter: none;
+    	opacity: 1 !important;
+    }
+    
+    /* "SEARCH" RESULTS */
+    .blockpost.searchposts .postmsg {
+    	border-bottom-left-radius: 0 !important;
+    	border-bottom: none !important;
+    }
+    .blockpost.searchposts .box-content {
+    	border: 1px solid var(--SACS-forum-post-border-color) !important;
+    	border-right: none !important;
+    	border-bottom-left-radius: 5px !important;
+    }
+    .blockpost.searchposts .box-head {
+    	border: 1px solid var(--SACS-forum-post-border-color) !important;
+    	border-bottom: none !important;
+    	padding: 8px;
+    	background-color: var(--SACS-forum-header-color) !important;
+    	border-top-left-radius: 5px !important;
+    	border-top-right-radius: 5px !important;
+    }
+    .blockpost.searchposts .box-head,
+	.blockpost.searchposts .box-head a {
+    	color: #fff !important;
+    }
+    .blockpost.searchposts .postleft {
+    	margin-left: 15px;
+    }
+    
+    /* FORUM HEADER */
+    .djangobb #brdheader.box h2 {
+    	text-align: center;
+    }
+    
+    .djangobb #brdheader.box {
+    	background-color: var(--SACS-forum-header-color);
+    }
+    
+    /* MISC */
+    .djangobb .firstpost:first-child .sa-original-poster {
+    	display: none;
+    } /* Removes the "Original Poster" badge from the first post. Only works if
+    "Highlight project creator in comments" is on*/
+    
+    
+    .postsignature hr {
+    	display: none !important;
+    }
+    
+    .postsignature {
+    	border-top: 1px var(--SACS-forum-post-sig-border) solid;
+    	padding-top: 5px;
+    	margin-top: 5px;
+    } /* This and the one above this will make the line between the post body
+    and signature go across the whole post */
+    
+    
+    .breadcrumb_rss {
+    	filter: var(--SACS-RSS-button-filters);
+    } /* This is to change the color of the RSS button to match the other links */
+}
