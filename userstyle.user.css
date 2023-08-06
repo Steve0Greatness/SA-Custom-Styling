@@ -1,10 +1,11 @@
 /* ==UserStyle==
 @name         Scratch Addons Custom Styling
 @namespace    https://steve0greatness.github.io/SA-Custom-Styling/
-@version      1.0.3
+@version      1.0.4
 @license      MIT
 @preprocessor default
 @var color SACS-forum-header-color "Forum Header Color" #064734
+@var color SACS-forum-txt-header-color "Forum Header Text Color" white
 ==/UserStyle== */
 
 @-moz-document domain("scratch.mit.edu") {
@@ -155,7 +156,8 @@
     }
     
     .djangobb #brdheader.box {
-    	background-color: var(--SACS-forum-header-color);
+    	background-color: var(--SACS-forum-header-color) !important;
+		color: var(--SACS-forum-txt-header-color) !important;
     }
     
     /* MISC */
@@ -175,9 +177,4 @@
     	margin-top: 5px;
     } /* This and the one above this will make the line between the post body
     and signature go across the whole post */
-    
-    
-    .breadcrumb_rss {
-    	filter: var(--SACS-RSS-button-filters);
-    } /* This is to change the color of the RSS button to match the other links */
 }

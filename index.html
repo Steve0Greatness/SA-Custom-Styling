@@ -20,6 +20,14 @@
             border-radius: 5px;
             color: #fff;
         }
+        
+        .important-links :any-link:not(:last-child) {
+            margin-right: 1em;
+        }
+
+        img.screenshot {
+            margin-bottom: .5em;
+        }
 
         /* Highlight.js */
 
@@ -65,9 +73,10 @@
 
 <body>
     <h1>Scratch Addons Custom Styling</h1>
-    <div class="import-links">
-        <a href="#changelog">Changelog</a> -
-        <a href="#sourcecode">UserStyle Source</a> -
+    <div class="important-links">
+        <a href="#changelog">Changelog</a>
+        <a href="#Screenshots">Screenshots</a>
+        <a href="#sourcecode">UserStyle Source</a>
         <a href="./userstyle.user.css">Download</a>
     </div>
     <p>This userstyle is incredibly basic, simply changing the styling of Certain webpages to be more inline with the original version of them... because I like it better.</p>
@@ -81,14 +90,24 @@
     <p>Made by <a href="https://github.com/Steve0Greatness">Steve0Greatness</a></p>
     <h2 id="changelog">Changelog</h2>
     <ul>
+        <li><b>V-1.0.4</b><br>
+            -- The user can now control the text color of the header.<br>
+            -- Forum header color can now be controlled(bugfix).</li>
         <li><b>V-1.0.3</b><br>
-            -- Changed to the <code>.user.css</code> format accepted by <a href="https://add0n.com/stylus.html">Stylus</a>.</li>
+            -- Changed to the <code>.user.css</code> format accepted by extensions like <a href="https://add0n.com/stylus.html">Stylus</a>.</li>
         <li><b>V-1.0.2</b><br>
             -- The forums' header color is now effected by the <code>var(--SACS-forum-header-color)</code> variable.<br>
             -- It's also centered in order to match <code>/search</code> and <code>/explore</code> more.</li>
         <li><b>V-1.0.1</b><br>
             -- The "original poster" badge should no longer show up on the first post of a topic <span class="BOTCHED">Bugged</span></li>
     </ul>
+    <h2 id="Screenshots">Screenshots</h2>
+    <div>
+        <button class="screenshot-opener" data-screenshot="Customization-BlueTop">Customizable Forums Head</button>
+        <button class="screenshot-opener" data-screenshot="No-more-button-links">No more button-like links</button>
+        <button class="screenshot-opener" data-screenshot="ReplyBox">Reply Box Border</button>
+    </div>
+    <img id="opened-screenshot" src="screenshots/Customization-BlueTop.png">
     <script type="module">
         import "https://code.jquery.com/jquery-3.7.0.min.js";
         import hljs from "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/es/highlight.min.js";
@@ -103,6 +122,13 @@
         CodeBlock.html(highlighted);
 
         })();
+
+        for (let i = 0; i < $(".screenshot-opener").length; i++) {
+            $(".screenshot-opener")[i].addEventListener("click", event => {
+                let { screenshot } = event.target.dataset;
+                $("#opened-screenshot").attr("src", `screenshots/${screenshot}.png`);
+            })
+        }
     </script>
 </body>
 
