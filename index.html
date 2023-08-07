@@ -6,12 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scratch Addons Custom Styling</title>
     <style>
-        .BOTCHED {
+        .bugged,
+        .bugfix {
             color: #fff;
-            background-color: #fa0;
+            background-color: var(--background);
             padding: 2px 5px;
             border-radius: 999px;
             display: inline-block;
+        }
+
+        .bugged {
+            --background: #fa0;
+        }
+
+        .bugfix {
+            --background: #f09;
         }
 
         .codeblock {
@@ -89,18 +98,7 @@
     </details>
     <p>Made by <a href="https://github.com/Steve0Greatness">Steve0Greatness</a></p>
     <h2 id="changelog">Changelog</h2>
-    <ul>
-        <li><b>V-1.0.4</b><br>
-            -- The user can now control the text color of the header.<br>
-            -- Forum header color can now be controlled(bugfix).</li>
-        <li><b>V-1.0.3</b><br>
-            -- Changed to the <code>.user.css</code> format accepted by extensions like <a href="https://add0n.com/stylus.html">Stylus</a>.</li>
-        <li><b>V-1.0.2</b><br>
-            -- The forums' header color is now effected by the <code>var(--SACS-forum-header-color)</code> variable.<br>
-            -- It's also centered in order to match <code>/search</code> and <code>/explore</code> more.</li>
-        <li><b>V-1.0.1</b><br>
-            -- The "original poster" badge should no longer show up on the first post of a topic <span class="BOTCHED">Bugged</span></li>
-    </ul>
+    <ul id="change-list"></ul>
     <h2 id="Screenshots">Screenshots</h2>
     <div>
         <button class="screenshot-opener" data-screenshot="Customization-BlueTop">Customizable Forums Head</button>
@@ -112,15 +110,25 @@
         import "https://code.jquery.com/jquery-3.7.0.min.js";
         import hljs from "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/es/highlight.min.js";
         import css from "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/es/languages/css.min.js";
+        import JSON5 from 'https://unpkg.com/json5@2/dist/index.min.mjs'
         hljs.registerLanguage("css", css);
         (async function() {
         
-        const UserStyleCode = await (await fetch("userstyle.user.css")).text();
-        const CodeBlock     = $("#codeblock-userstyleCSS");
-        
+        const UserStyleCode = await (await fetch("userstyle.user.css")).text();        
         const highlighted = hljs.highlight(UserStyleCode, { language: "css" }).value;
-        CodeBlock.html(highlighted);
-
+        $("#codeblock-userstyleCSS").html(highlighted);
+        
+        const Changelog = JSON5.parse(await (await fetch("changelog.json5")).text());
+        for (let i = 0; i < Changelog.length; i++) {
+            let change = Changelog[i];
+            let changes = change.changes.map(val => {
+                let tags = val.tags.map(tag => `<span class="${tag}">${tag.charAt(0).toUpperCase()}${tag.slice(1)}</span>`).join(" ");
+                return `${val.value} ${tags}`;
+            }).join("<br>-- ");
+            $("#change-list").append(
+                $(`<li><b>V-${change.version}</b><br>${changes}</li>`)
+            )
+        }
         })();
 
         for (let i = 0; i < $(".screenshot-opener").length; i++) {
