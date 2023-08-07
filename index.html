@@ -119,26 +119,22 @@
         import "https://code.jquery.com/jquery-3.7.0.min.js";
         import hljs from "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/es/highlight.min.js";
         import css from "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/es/languages/css.min.js";
-        import JSON5 from 'https://unpkg.com/json5@2/dist/index.min.mjs'
+        import yaml from "https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.mjs";
         hljs.registerLanguage("css", css);
         (async function() {
         
         const UserStyleCode = await (await fetch("userstyle.user.css")).text();        
         var highlighted = hljs.highlight(UserStyleCode, { language: "css" }).value;
         $("#codeblock-userstyleCSS").html(highlighted);
-
-        var userstyleMeta = $(".hljs-comment")[0].text().split("\n").slice(1, -1).map(val => {
-            let attrs = val.split(/(\t|\s)*/);
-            if (attrs[0] == "@var") {
-            }
-        });
         
-        const Changelog = JSON5.parse(await (await fetch("changelog.json5")).text());
+        const Changelog = yaml.load(await (await fetch("changelog.yml")).text());
         const Separator = "--&nbsp;&nbsp;&nbsp;"
         for (let i = 0; i < Changelog.length; i++) {
             let change = Changelog[i];
             let changes = Separator + change.changes.map(val => {
-                let tags = val.tags.map(tag => `<span class="${tag}">${tag.charAt(0).toUpperCase()}${tag.slice(1)}</span>`).join(" ");
+                let tags = val?.tags?.map(tag => `<span class="${tag}">${tag.charAt(0).toUpperCase()}${tag.slice(1)}</span>`).join(" ");
+                if (tags === null)
+                    tags = ""
                 let value = marked.parse(val.value).slice(3, -5);
                 return `${value} ${tags}`;
             }).join("<br>" + Separator);
