@@ -6,4 +6,4 @@ Please note: this userstyle is made for usage with [Scratch Addons](https://scra
 
 **READ BEFORE INSTALLING.** When the userstyle is installed, you may not like the color of the forums header, you can change that by going into the userstyle's settings and changing Forum Header Color to whatever color you want.
 
-[Bring me to the download](https://steve0greatness.github.io/SA-Custom-Styling/userstyle.user.css) - [View Source](userstyle.user.css)
+[Bring me to the download](https://steve0greatness.github.io/SA-Custom-Styling/userstyle.user.css) - [View Source](userstyle.user.css?dontdownload=1)
