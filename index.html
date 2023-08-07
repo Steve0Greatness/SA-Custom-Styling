@@ -38,6 +38,14 @@
             margin-bottom: .5em;
         }
 
+        .screenshot-actions {
+            margin-bottom: .25rem;
+        }
+
+        .opened-screenshot {
+            max-width: 1750px;
+        }
+
         /* Highlight.js */
 
         .hljs-comment {
@@ -78,6 +86,7 @@
             color: #f99;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
@@ -100,12 +109,12 @@
     <h2 id="changelog">Changelog</h2>
     <ul id="change-list"></ul>
     <h2 id="Screenshots">Screenshots</h2>
-    <div>
+    <div class="screenshot-actions">
         <button class="screenshot-opener" data-screenshot="Customization-BlueTop">Customizable Forums Head</button>
         <button class="screenshot-opener" data-screenshot="No-more-button-links">No more button-like links</button>
         <button class="screenshot-opener" data-screenshot="ReplyBox">Reply Box Border</button>
     </div>
-    <img id="opened-screenshot" src="screenshots/Customization-BlueTop.png">
+    <img class="opened-screenshot" id="opened-screenshot" src="screenshots/Customization-BlueTop.png">
     <script type="module">
         import "https://code.jquery.com/jquery-3.7.0.min.js";
         import hljs from "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/es/highlight.min.js";
@@ -115,20 +124,29 @@
         (async function() {
         
         const UserStyleCode = await (await fetch("userstyle.user.css")).text();        
-        const highlighted = hljs.highlight(UserStyleCode, { language: "css" }).value;
+        var highlighted = hljs.highlight(UserStyleCode, { language: "css" }).value;
         $("#codeblock-userstyleCSS").html(highlighted);
+
+        var userstyleMeta = $(".hljs-comment")[0].text().split("\n").slice(1, -1).map(val => {
+            let attrs = val.split(/(\t|\s)*/);
+            if (attrs[0] == "@var") {
+            }
+        });
         
         const Changelog = JSON5.parse(await (await fetch("changelog.json5")).text());
+        const Separator = "--&nbsp;&nbsp;&nbsp;"
         for (let i = 0; i < Changelog.length; i++) {
             let change = Changelog[i];
-            let changes = change.changes.map(val => {
+            let changes = Separator + change.changes.map(val => {
                 let tags = val.tags.map(tag => `<span class="${tag}">${tag.charAt(0).toUpperCase()}${tag.slice(1)}</span>`).join(" ");
-                return `${val.value} ${tags}`;
-            }).join("<br>-- ");
+                let value = marked.parse(val.value).slice(3, -5);
+                return `${value} ${tags}`;
+            }).join("<br>" + Separator);
             $("#change-list").append(
                 $(`<li><b>V-${change.version}</b><br>${changes}</li>`)
-            )
+            );
         }
+
         })();
 
         for (let i = 0; i < $(".screenshot-opener").length; i++) {

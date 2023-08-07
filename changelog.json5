@@ -16,7 +16,7 @@
         version: "1.0.3",
         changes: [
             {
-                value: "Changed to the `.user.css` format accepted by extensions like (Stylus)[https://add0n.com/stylus.html].",
+                value: "Changed to the `.user.css` format accepted by extensions like [Stylus](https://add0n.com/stylus.html).",
                 tags: [],
             },
         ],
