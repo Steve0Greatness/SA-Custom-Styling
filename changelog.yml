@@ -1,3 +1,9 @@
+- version: 1.0.5
+  changes:
+    - value: Currently selected pages will now default to the color that has been set, either by SA or Scratch
+      tags:
+        - bugfix
+
 - version: 1.0.4
   changes:
     - value: The user can now control the text color of the header.

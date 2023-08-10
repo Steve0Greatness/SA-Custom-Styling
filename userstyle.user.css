@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         Scratch Addons Custom Styling
 @namespace    https://steve0greatness.github.io/SA-Custom-Styling/
-@version      1.0.4
+@version      1.0.5
 @license      MIT
 @preprocessor default
 @var color SACS-forum-header-color "Forum Header Color" #064734
@@ -17,7 +17,7 @@
     	--SACS-URL-color: var(--darkWww-link, #4D97FF);
     	--SACS-reply-box-color: var(--darkWww-box, white);
     	--SACS-URL-hover-color: var(--darkWww-link-hover, #4280D7);
-    	--SACS-RSS-button-filters: grayscale() invert() brightness(3);
+        --SACS-page-text-color: var(--darkWww-page-text, #575e75);
     }
     
     /* LINKS DE-BUTTON-IFICATION */
@@ -78,7 +78,7 @@
     }
     .firstpost .box .box-head .conr,
 	.firstpost .box .box-head a {
-    	color: #fff !important;
+    	color: var(--SACS-page-text-color) !important;
     }
     
     /* REPLY BOX */
@@ -109,17 +109,15 @@
     .pagination span.current,
     .pagination span.current:hover {
     	opacity: 1 !important;
-    	color: #fff !important;
+    	color: var(--SACS-page-text-color) !important;
     }
     
-    .page-current.active {
-    	color: white !important;
-    }
+    .page-current.active,
     .page-current.active:hover {
-    	color: white !important;
+    	color: var(--SACS-page-text-color) !important;
     }
     .page-links .disabled:hover {
-    	color: white !important;
+    	color: var(--SACS-page-text-color)  !important;
     	filter: none;
     	opacity: 1 !important;
     }
@@ -144,7 +142,7 @@
     }
     .blockpost.searchposts .box-head,
 	.blockpost.searchposts .box-head a {
-    	color: #fff !important;
+    	color: var(--SACS-page-text-color)  !important;
     }
     .blockpost.searchposts .postleft {
     	margin-left: 15px;
